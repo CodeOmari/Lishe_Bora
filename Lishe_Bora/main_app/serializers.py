@@ -33,9 +33,17 @@ class IngredientSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
-    # ingredients = IngredientSerializer(many=True, read_only=True, source='ingredient_set')
+    # Author to be presented by their usernames not User ID
+    author = serializers.CharField(source='author.username', read_only=True)
 
     class Meta:
         model = Recipe
-        fields = ['author', 'title', 'description', 'instructions', 'duration', 'serving']
-        read_only_fields = ['id', 'created_at', 'updated_at']
+        fields = '__all__'
+        read_only_fields = ['id', 'created_at', 'updated_at', 'author']
+
+    def validate_duration(self, value):
+        if value <= 0:
+            raise serializers.ValidationError('Duration must be a positive number of minutes')
+        if value >= 240:
+            raise serializers.ValidationError('Duration cannot exceed 240 minutes(4hrs)')
+        return value
