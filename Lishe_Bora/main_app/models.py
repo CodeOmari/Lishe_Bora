@@ -7,8 +7,9 @@ class Recipe(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=150)
     instructions = models.TextField()
-    duration = models.TimeField()
-    serving = models.TextField()
+    duration = models.IntegerField(help_text='Duration in minutes', 
+                                   verbose_name='Preparation Duration(min)')
+    serving = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
