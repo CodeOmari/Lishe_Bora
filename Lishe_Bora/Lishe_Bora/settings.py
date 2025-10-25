@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+# JSON Web Token Authentication
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -55,6 +56,8 @@ REST_FRAMEWORK = {
     ],
 }
 
+# access token is valid for only 30 minutes after been issued
+# After it expires the user must use the refresh token to obtain new access token
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
