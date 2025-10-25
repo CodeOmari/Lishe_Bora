@@ -8,4 +8,7 @@ db.sqlite3
 venv
 
 # Cache files
-__pycache__
+*/__pycache__/
+
+# Migrations
+*/migrations/
